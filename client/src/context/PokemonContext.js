@@ -29,6 +29,21 @@ function PokemonContextProvider(props) {
 
   let locations = centroidsData;
 
+  const catchPokemon = (id) => {
+    console.log(id);
+    const updaetPokemons = pokemons.map((p) => {
+      if (p.id === id) {
+        console.log(p);
+        return {
+          ...p,
+          isCatch: true,
+        };
+      }
+      return p;
+    });
+    setPokemons(updaetPokemons);
+  };
+
   const location = () => {
     const index = Math.floor(Math.random() * locations.length);
     const l = {
@@ -50,7 +65,7 @@ function PokemonContextProvider(props) {
     }
   }, [data]);
 
-  const context = { pokemons, zoom, setZoom, center, setCenter };
+  const context = { pokemons, zoom, setZoom, center, setCenter, catchPokemon };
   return (
     <PokemonContext.Provider value={context}>
       {props.children}

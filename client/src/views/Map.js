@@ -6,9 +6,14 @@ import { PokemonContext } from '../context/PokemonContext';
 
 function Map() {
   const MAP_KEY = process.env.REACT_APP_MAP_KEY;
-  const { pokemons, zoom, setZoom, center, setCenter } = useContext(
-    PokemonContext
-  );
+  const {
+    pokemons,
+    zoom,
+    setZoom,
+    center,
+    setCenter,
+    catchPokemon,
+  } = useContext(PokemonContext);
 
   const handleChange = (e) => {
     console.log(e);
@@ -16,17 +21,21 @@ function Map() {
     setCenter(e.center);
   };
 
-  const pokemons_list = pokemons.map((p, index) => {
-    return (
-      <Pokemon
-        key={p.id}
-        lat={p.location.lat}
-        lng={p.location.lng}
-        image={p.image}
-        zoom={zoom}
-      />
-    );
-  });
+  const pokemons_list = pokemons
+    .filter((p) => !p.isCatch)
+    .map((p, index) => {
+      return (
+        <Pokemon
+          key={p.id}
+          id={p.id}
+          lat={p.location.lat}
+          lng={p.location.lng}
+          image={p.image}
+          zoom={zoom}
+          catchPokemon={catchPokemon}
+        />
+      );
+    });
   return (
     <div style={{ height: 'calc(100vh - 50px)', width: '100%' }}>
       <GoogleMapReact

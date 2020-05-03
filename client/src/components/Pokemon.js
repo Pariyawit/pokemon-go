@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Pokemon({ id, image, maxHP, name, zoom }) {
+function Pokemon({ id, image, maxHP, name, zoom, catchPokemon }) {
   const size = 10 * zoom;
   const style = {
     width: size,
@@ -9,8 +9,12 @@ function Pokemon({ id, image, maxHP, name, zoom }) {
   };
   return (
     <>
-      {parseInt(zoom) >= 9 ? (
-        <div className='pokemon' style={style}></div>
+      {parseInt(zoom) >= 1 ? (
+        <div
+          className='pokemon'
+          style={style}
+          onClick={() => catchPokemon(id)}
+        ></div>
       ) : (
         <div className='marker'></div>
       )}
