@@ -1,14 +1,23 @@
 import React from 'react';
 
 function Pokemon({ id, image, maxHP, name, zoom }) {
-  const size = 20 * zoom;
+  const size = 10 * zoom;
   const style = {
-    maxWidth: size,
+    width: size,
+    height: size,
+    backgroundImage: `url(${image})`,
+  };
+  const img_style = {
+    backgroundImage: image,
   };
   return (
-    <div className='pokemon'>
-      <img src={image} style={style} />
-    </div>
+    <>
+      {parseInt(zoom) >= 9 ? (
+        <div className='pokemon' style={style}></div>
+      ) : (
+        <div className='marker'></div>
+      )}
+    </>
   );
 }
 
