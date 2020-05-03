@@ -1,24 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react';
+import './App.scss';
+
+import Map from './components/Map';
+
+import { useQuery } from '@apollo/react-hooks';
+import { gql } from 'apollo-boost';
+
+const POKEMONS = gql`
+  {
+    pokemons(first: 100) {
+      id
+      name
+      image
+      maxHP
+    }
+  }
+`;
 
 function App() {
+  const [pokemons, setPokemons] = useState([]);
+  const { loading, error, data } = useQuery(POKEMONS);
+  // if (loading) return <p>Loading...</p>;
+  // if (error) return <p>Error :(</p>;
+
+  useEffect(() => {
+    if (data) setPokemons(data.pokemons);
+  }, [data]);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='App'>
+      <Map pokemons={pokemons} />
     </div>
   );
 }
