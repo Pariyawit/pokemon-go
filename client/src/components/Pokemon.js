@@ -7,9 +7,6 @@ function Pokemon({ id, image, maxHP, name, zoom }) {
     height: size,
     backgroundImage: `url(${image})`,
   };
-  const img_style = {
-    backgroundImage: image,
-  };
   return (
     <>
       {parseInt(zoom) >= 9 ? (
