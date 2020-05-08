@@ -6,7 +6,7 @@ function PokedexItem({ pokemon }) {
   };
   return (
     <>
-      {pokemon.isCatch ? (
+      {pokemon.status == 'caught' ? (
         <div className='pokedex__item'>
           <div className='pokedex__content'>
             <div className='pokedex__image' style={img_style}></div>

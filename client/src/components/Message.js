@@ -20,11 +20,11 @@ function Message({ zoom, count, distance, bounds, pokeball, status }) {
 
   return (
     <div className='message'>
-      {status === 'caught' ? (
+      {pokeball ? (
         <p className='message__text'>
           Gotcha!
           <br />
-          {pokeball.name.toUpperCase} was caught!
+          {pokeball.name.toUpperCase()} was caught!
         </p>
       ) : zoom < 7 ? (
         <p className='message__text'>

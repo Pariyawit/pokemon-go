@@ -36,10 +36,9 @@ function PokemonContextProvider(props) {
     const updatePokemons = pokemons.map((p) => {
       if (p.id === id) {
         console.log(p);
-        setPokeball(p);
         return {
           ...p,
-          isCatch: true,
+          status: 'caught',
         };
       }
       return p;
@@ -61,7 +60,7 @@ function PokemonContextProvider(props) {
     if (data) {
       const updatePokemon = data.pokemons.map((p) => ({
         ...p,
-        isCatch: false,
+        status: 'wild',
         location: location(),
       }));
       setPokemons(updatePokemon);
@@ -76,6 +75,7 @@ function PokemonContextProvider(props) {
     setCenter,
     catchPokemon,
     pokeball,
+    setPokeball,
   };
   return (
     <PokemonContext.Provider value={context}>
