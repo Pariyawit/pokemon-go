@@ -1,6 +1,9 @@
 import React, { useContext } from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+
 import { PokemonContext } from '../context/PokemonContext';
 import PokedexItem from '../components/PokedexItem';
+import Detail from '../views/Detail';
 
 function Pokedex() {
   const { pokemons } = useContext(PokemonContext);
@@ -15,8 +18,15 @@ function Pokedex() {
 
   return (
     <div className='container container--red'>
-      <div className='catch-count'>{`${catched}/${pokemons.length}`}</div>
-      <div className='pokedex grid'>{list}</div>
+      <Switch>
+        <Route exact path='/pokedex'>
+          <div className='submenu submenu--right'>{`${catched}/${pokemons.length}`}</div>
+          <div className='pokedex grid'>{list}</div>
+        </Route>
+        <Route path='/pokedex/:name'>
+          <Detail />
+        </Route>
+      </Switch>
     </div>
   );
 }

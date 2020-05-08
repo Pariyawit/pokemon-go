@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 function Header() {
   return (
     <header className='header'>
-      <div>Pokemon Go</div>
+      <div>PokemonGo</div>
       <nav className='nav'>
         <ul className='nav__list'>
           <li className='nav__item'>

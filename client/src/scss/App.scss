@@ -101,17 +101,25 @@ main {
 ///POkedex
 .container {
   padding: 1.6rem;
+  min-height: calc(100vh - 55px - 3.2rem);
   &--red {
     background-color: $red;
   }
 }
 
-.catch-count {
+.submenu {
   display: flex;
-  flex-direction: row-reverse;
   color: $light;
-  font-size: 2.4rem;
   margin-bottom: 1.6rem;
+  &--right {
+    flex-direction: row-reverse;
+    font-size: 2.4rem;
+  }
+}
+
+a {
+  color: inherit;
+  text-decoration: inherit;
 }
 
 .grid {
@@ -165,8 +173,12 @@ main {
       }
     }
 
+    a {
+      text-decoration: none;
+      padding: 0;
+    }
+
     &--notfound {
-      background-color: #ccc;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -211,5 +223,55 @@ main {
     width: 0px !important;
     height: 0px !important;
     opacity: 0;
+  }
+}
+
+.detail {
+  display: grid;
+  // grid-template-columns: 1fr;
+  // grid-template-rows: 200px 1fr;
+  width: 100%;
+  // grid-gap: 0.8rem;
+
+  &__card {
+    background-color: $gray;
+    padding: 1.2rem;
+    border-radius: 20px;
+  }
+
+  &__image {
+    border-radius: 5px;
+    background: $light;
+    padding: 0.8rem;
+    text-align: center;
+    img {
+      // width: 100%;
+      height: 150px;
+    }
+  }
+}
+
+.table {
+  margin-top: 0.8rem;
+  background: $gray;
+  color: $dark;
+  &__row {
+    // padding: 0.8rem;
+    display: flex;
+    justify-content: space-between;
+    &--head {
+      background: $dark;
+      color: $light;
+    }
+  }
+  &__item {
+    padding: 0.8rem;
+    display: inline-block;
+  }
+  &__list {
+    margin: 0;
+    li {
+      line-height: 1.6rem;
+    }
   }
 }

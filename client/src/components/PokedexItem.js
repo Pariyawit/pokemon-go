@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 function PokedexItem({ pokemon }) {
   const img_style = {
@@ -7,10 +8,12 @@ function PokedexItem({ pokemon }) {
   console.log(pokemon);
   return (
     <>
-      {pokemon.status == 'caught' ? (
+      {pokemon.status == 'caught' || true ? (
         <div className='pokedex__item'>
           <div className='pokedex__content'>
-            <div className='pokedex__image' style={img_style}></div>
+            <Link to={`/pokedex/${pokemon.name}`}>
+              <div className='pokedex__image' style={img_style}></div>
+            </Link>
             <p className='pokedex__title'>{pokemon.name}</p>
           </div>
         </div>
