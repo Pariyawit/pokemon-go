@@ -36,6 +36,11 @@ body {
   }
 }
 
+.map {
+  width: 100%;
+  height: calc(100vh - 55px);
+}
+
 .pokemon {
   border: 5px solid $red;
   border-radius: 50%;
@@ -46,6 +51,9 @@ body {
   background-size: contain;
   background-origin: content-box;
   padding: 5px;
+  position: absolute;
+  top: -25px;
+  left: -25px;
 }
 
 .marker {
@@ -56,18 +64,19 @@ body {
 }
 
 .message {
-  // height: 80px;
   width: 100%;
   background: rgba(0, 46, 41, 0.66);
-  // background: $dark;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+
   &__text {
     color: $light;
     margin: 1.2rem;
     font-size: 1.2rem;
     line-height: 1.6rem;
+    text-align: center;
   }
-  position: absolute;
-  bottom: 0;
 }
 
 ///POkedex

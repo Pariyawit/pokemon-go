@@ -19,6 +19,7 @@ const PokemonContext = React.createContext();
 
 function PokemonContextProvider(props) {
   const [pokemons, setPokemons] = useState([]);
+  const [pokeball, setPokeball] = useState();
   const [center, setCenter] = useState({
     lat: 20,
     lng: 0,
@@ -35,6 +36,7 @@ function PokemonContextProvider(props) {
     const updatePokemons = pokemons.map((p) => {
       if (p.id === id) {
         console.log(p);
+        setPokeball(p);
         return {
           ...p,
           isCatch: true,
@@ -66,7 +68,15 @@ function PokemonContextProvider(props) {
     }
   }, [data]);
 
-  const context = { pokemons, zoom, setZoom, center, setCenter, catchPokemon };
+  const context = {
+    pokemons,
+    zoom,
+    setZoom,
+    center,
+    setCenter,
+    catchPokemon,
+    pokeball,
+  };
   return (
     <PokemonContext.Provider value={context}>
       {props.children}

@@ -6,12 +6,6 @@ import Message from '../components/Message';
 import { PokemonContext } from '../context/PokemonContext';
 
 function createMapOptions(maps) {
-  // next props are exposed at maps
-  // "Animation", "ControlPosition", "MapTypeControlStyle", "MapTypeId",
-  // "NavigationControlStyle", "ScaleControlStyle", "StrokePosition", "SymbolPath", "ZoomControlStyle",
-  // "DirectionsStatus", "DirectionsTravelMode", "DirectionsUnitSystem", "DistanceMatrixStatus",
-  // "DistanceMatrixElementStatus", "ElevationStatus", "GeocoderLocationType", "GeocoderStatus", "KmlLayerStatus",
-  // "MaxZoomStatus", "StreetViewStatus", "TransitMode", "TransitRoutePreference", "TravelMode", "UnitSystem"
   return {
     zoomControlOptions: {
       position: maps.ControlPosition.TOP_RIGHT,
@@ -20,7 +14,41 @@ function createMapOptions(maps) {
     fullscreenControl: false,
     minZoom: 2,
     maxZoom: 7,
+    gestureHandling: 'greedy',
   };
+}
+
+function distance(nw, se, p) {
+  const { min, abs, sqrt, pow } = Math;
+  const min_lat = nw.lat;
+  const max_lat = se.lat;
+  const min_lng = se.lng;
+  const max_lng = nw.lng;
+
+  const lat = p.location.lat;
+  const lng = p.location.lng;
+
+  if (p.lat >= min_lat && p.lat <= min.lat) {
+    return min(abs(min_lat - lat), abs(max_lat - lat));
+  }
+  if (p.lng >= min_lng && p.lng <= min.lng) {
+    return min(abs(min_lng - lng), abs(max_lng - lng));
+  }
+  return min(
+    sqrt(pow(lat - min_lat, 2) + pow(lng - min_lng, 2)),
+    sqrt(pow(lat - max_lat, 2) + pow(lng - min_lng, 2)),
+    sqrt(pow(lat - min_lat, 2) + pow(lng - max_lng, 2)),
+    sqrt(pow(lat - max_lat, 2) + pow(lng - max_lng, 2))
+  );
+}
+
+function closest_pokemon(pokemons, nw, se) {
+  const min_distance = pokemons.reduce((out, p) => {
+    const d = distance(nw, se, p);
+    if (d < out) return d;
+    return out;
+  }, 9999);
+  return min_distance;
 }
 
 function scanArea(pokemons, nw, se) {
@@ -44,6 +72,7 @@ function Map() {
   const MAP_KEY = process.env.REACT_APP_MAP_KEY;
   const [status, setStatus] = useState('idle');
   const [count, setCount] = useState(0);
+  const [distance, setDistance] = useState();
   const [nw, setNW] = useState();
   const [se, setSE] = useState();
   const {
@@ -53,7 +82,16 @@ function Map() {
     center,
     setCenter,
     catchPokemon,
+    pokeball,
   } = useContext(PokemonContext);
+
+  const handleClick = (e) => {
+    console.log('caught');
+    setStatus('caught');
+    setTimeout(() => {
+      setStatus('idle');
+    }, 3000);
+  };
 
   const handleChange = (e) => {
     console.log(e);
@@ -62,6 +100,7 @@ function Map() {
     setNW(e.bounds.nw);
     setSE(e.bounds.se);
     setCount(scanArea(pokemons, e.bounds.nw, e.bounds.se));
+    setDistance(closest_pokemon(pokemons, e.bounds.nw, e.bounds.se));
   };
 
   useEffect(() => {
@@ -80,11 +119,12 @@ function Map() {
           image={p.image}
           zoom={zoom}
           catchPokemon={catchPokemon}
+          onClick={handleClick}
         />
       );
     });
   return (
-    <div style={{ height: 'calc(100vh - 50px)', width: '100%' }}>
+    <div className='map'>
       <GoogleMapReact
         bootstrapURLKeys={{ key: MAP_KEY }}
         center={center}
@@ -96,7 +136,14 @@ function Map() {
       >
         {status === 'idle' && pokemons_list}
       </GoogleMapReact>
-      <Message>Spotted {count} pokemons. Zoom to catch</Message>
+      <Message
+        zoom={zoom}
+        count={count}
+        distance={distance}
+        bounds={{ nw, se }}
+        pokeball={pokeball}
+        status={status}
+      />
     </div>
   );
 }

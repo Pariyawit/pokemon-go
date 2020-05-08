@@ -1,7 +1,8 @@
 import React from 'react';
 
-function Pokemon({ id, image, maxHP, name, zoom, catchPokemon }) {
-  const size = 10 * zoom;
+function Pokemon({ id, image, zoom, catchPokemon }) {
+  const size = 50;
+
   const style = {
     width: size,
     height: size,
