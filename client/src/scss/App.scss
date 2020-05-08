@@ -13,15 +13,16 @@ body {
 
 .header {
   height: 55px;
-  background: $gray;
-  color: white;
-  display: flex;
-  justify-content: space-evenly;
+  background: $dark;
+  color: $gray;
   align-items: center;
   padding: 0 1.6rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }
 
 .nav {
+  text-align: right;
   &__list {
     padding: 0;
     margin: 0;
@@ -29,18 +30,22 @@ body {
   &__item {
     display: inline;
     padding-left: 0.8rem;
+    a {
+      color: $gray !important;
+    }
   }
 }
 
 .pokemon {
-  border: 5px solid #ccc;
-  border-radius: 20px;
+  border: 5px solid $red;
+  border-radius: 50%;
   background-color: #fff;
   display: flex;
-  justify-items: center;
   background-position: 50% 50%;
   background-repeat: no-repeat;
   background-size: contain;
+  background-origin: content-box;
+  padding: 5px;
 }
 
 .marker {
@@ -50,11 +55,35 @@ body {
   border-radius: 5px;
 }
 
+.message {
+  // height: 80px;
+  width: 100%;
+  background: rgba(0, 46, 41, 0.66);
+  // background: $dark;
+  &__text {
+    color: $light;
+    margin: 1.2rem;
+    font-size: 1.2rem;
+    line-height: 1.6rem;
+  }
+  position: absolute;
+  bottom: 0;
+}
+
+///POkedex
 .container {
   padding: 1.6rem;
   &--red {
     background-color: $red;
   }
+}
+
+.catch-count {
+  display: flex;
+  flex-direction: row-reverse;
+  color: $light;
+  font-size: 2.4rem;
+  margin-bottom: 1.6rem;
 }
 
 .grid {

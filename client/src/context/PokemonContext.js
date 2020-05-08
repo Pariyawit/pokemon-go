@@ -23,7 +23,7 @@ function PokemonContextProvider(props) {
     lat: 20,
     lng: 0,
   });
-  const [zoom, setZoom] = useState(1);
+  const [zoom, setZoom] = useState(2);
   const { loading, error, data } = useQuery(POKEMONS);
   // if (loading) return <p>Loading...</p>;
   // if (error) return <p>Error :(</p>;
@@ -32,7 +32,7 @@ function PokemonContextProvider(props) {
 
   const catchPokemon = (id) => {
     console.log(id);
-    const updaetPokemons = pokemons.map((p) => {
+    const updatePokemons = pokemons.map((p) => {
       if (p.id === id) {
         console.log(p);
         return {
@@ -42,7 +42,7 @@ function PokemonContextProvider(props) {
       }
       return p;
     });
-    setPokemons(updaetPokemons);
+    setPokemons(updatePokemons);
   };
 
   const location = () => {

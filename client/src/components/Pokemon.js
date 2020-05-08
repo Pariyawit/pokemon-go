@@ -9,14 +9,15 @@ function Pokemon({ id, image, maxHP, name, zoom, catchPokemon }) {
   };
   return (
     <>
-      {parseInt(zoom) >= 1 ? (
+      {parseInt(zoom) >= 7 ? (
         <div
           className='pokemon'
           style={style}
           onClick={() => catchPokemon(id)}
         ></div>
       ) : (
-        <div className='marker'></div>
+        // <div className='marker'></div>
+        <div></div>
       )}
     </>
   );
