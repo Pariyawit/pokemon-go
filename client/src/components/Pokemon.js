@@ -1,11 +1,23 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { PokemonContext } from '../context/PokemonContext';
 
-function Pokemon({ pokemon, zoom, catchPokemon }) {
-  const { setPokeball } = useContext(PokemonContext);
+function show(p, nw, se) {
+  if (
+    p.status != 'caught' &&
+    p.location.lat >= se.lat &&
+    p.location.lat <= nw.lat &&
+    p.location.lng <= se.lng &&
+    p.location.lng >= nw.lng
+  ) {
+    return true;
+  }
+  return false;
+}
+
+function Pokemon({ pokemon, zoom }) {
+  const { setPokeball, bounds, setPokemonStatus } = useContext(PokemonContext);
   const size = 50;
-  const { id, image } = pokemon;
-  const [status, setStatus] = useState();
+  const { status, id, image } = pokemon;
   const style = {
     width: size,
     height: size,
@@ -14,11 +26,10 @@ function Pokemon({ pokemon, zoom, catchPokemon }) {
 
   const handleClick = () => {
     setPokeball(pokemon);
-    setStatus('pokeball');
-    setTimeout(() => {
-      catchPokemon(id);
-    }, 1000);
+    setPokemonStatus(id, 'caught');
   };
+
+  const pClass = status == 'wild' ? 'pokemon' : 'pokemon pokemon--pokeball';
 
   return (
     <>
@@ -26,7 +37,9 @@ function Pokemon({ pokemon, zoom, catchPokemon }) {
         <div className='pokeball'>
           <img src='/pokeball.png'></img>
         </div>
-      ) : status !== 'caught' && parseInt(zoom) >= 7 ? (
+      ) : status !== 'caught' &&
+        parseInt(zoom) >= 7 &&
+        show(pokemon, bounds.nw, bounds.se) ? (
         <div className='pokemon' style={style} onClick={handleClick}></div>
       ) : (
         // <div className='marker'></div>

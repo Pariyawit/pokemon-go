@@ -10,14 +10,16 @@ function App() {
   return (
     <Router>
       <Header />
-      <Switch>
-        <Route exact path='/'>
-          <Map />
-        </Route>
-        <Route path='/pokedex'>
-          <Pokedex />
-        </Route>
-      </Switch>
+      <main>
+        <Switch>
+          <Route exact path='/'>
+            <Map />
+          </Route>
+          <Route path='/pokedex'>
+            <Pokedex />
+          </Route>
+        </Switch>
+      </main>
     </Router>
   );
 }

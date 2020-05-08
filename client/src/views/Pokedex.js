@@ -9,7 +9,7 @@ function Pokedex() {
   ));
 
   const catched = pokemons.reduce(
-    (total, p) => (p.isCatch ? total + 1 : total),
+    (total, p) => (p.status == 'caught' ? total + 1 : total),
     0
   );
 

@@ -56,7 +56,7 @@ function scanArea(pokemons, nw, se) {
   if (nw === undefined) return;
   let cnt = pokemons.reduce((total, p) => {
     if (
-      p.isCatch != true &&
+      p.status != true &&
       p.location.lat >= se.lat &&
       p.location.lat <= nw.lat &&
       p.location.lng <= se.lng &&
@@ -82,18 +82,11 @@ function Map() {
     setZoom,
     center,
     setCenter,
-    catchPokemon,
     pokeball,
     setPokeball,
+    setBounds,
+    setPokemonStatus,
   } = useContext(PokemonContext);
-
-  const handleClick = (e) => {
-    console.log('caught');
-    setStatus('caught');
-    setTimeout(() => {
-      setStatus('idle');
-    }, 3000);
-  };
 
   const handleChange = (e) => {
     // console.log(e);
@@ -104,6 +97,7 @@ function Map() {
     setCount(scanArea(pokemons, e.bounds.nw, e.bounds.se));
     setDistance(closest_pokemon(pokemons, e.bounds.nw, e.bounds.se));
     setPokeball(null);
+    setBounds(e.bounds);
   };
 
   useEffect(() => {
@@ -111,7 +105,7 @@ function Map() {
   }, [pokemons]);
 
   const pokemons_list = pokemons
-    .filter((p) => p.status == 'wild')
+    .filter((p) => p.status !== 'caught')
     .map((p, index) => {
       return (
         <Pokemon
@@ -120,8 +114,6 @@ function Map() {
           lat={p.location.lat}
           lng={p.location.lng}
           zoom={zoom}
-          catchPokemon={catchPokemon}
-          onClick={handleClick}
         />
       );
     });
