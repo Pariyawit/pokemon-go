@@ -43,29 +43,33 @@ function distance(nw, se, p) {
 }
 
 function closest_pokemon(pokemons, nw, se) {
-  const min_distance = pokemons.reduce((out, p) => {
-    const d = distance(nw, se, p);
-    if (d < out) return d;
-    return out;
-  }, 9999);
+  const min_distance = pokemons
+    .filter((p) => p.status == 'wild')
+    .reduce((out, p) => {
+      const d = distance(nw, se, p);
+      if (d < out) return d;
+      return out;
+    }, 9999);
   return min_distance;
 }
 
 function scanArea(pokemons, nw, se) {
   console.log({ pokemons, nw, se });
   if (nw === undefined) return;
-  let cnt = pokemons.reduce((total, p) => {
-    if (
-      p.status != true &&
-      p.location.lat >= se.lat &&
-      p.location.lat <= nw.lat &&
-      p.location.lng <= se.lng &&
-      p.location.lng >= nw.lng
-    ) {
-      return total + 1;
-    }
-    return total;
-  }, 0);
+  let cnt = pokemons
+    .filter((p) => p.status == 'wild')
+    .reduce((total, p) => {
+      if (
+        p.status != true &&
+        p.location.lat >= se.lat &&
+        p.location.lat <= nw.lat &&
+        p.location.lng <= se.lng &&
+        p.location.lng >= nw.lng
+      ) {
+        return total + 1;
+      }
+      return total;
+    }, 0);
   return cnt;
 }
 
