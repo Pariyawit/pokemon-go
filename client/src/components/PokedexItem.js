@@ -10,12 +10,12 @@ function PokedexItem({ pokemon }) {
         <div className='pokedex__item'>
           <div className='pokedex__content'>
             <div className='pokedex__image' style={img_style}></div>
-            <div>{pokemon.name}</div>
+            <p className='pokedex__title'>{pokemon.name}</p>
           </div>
         </div>
       ) : (
         <div className='pokedex__item pokedex__item--notfound'>
-          <p>?</p>
+          <p>{pokemon.number}</p>
         </div>
       )}
     </>

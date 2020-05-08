@@ -8,8 +8,8 @@ function Pokedex() {
     <PokedexItem key={pokemon.id} pokemon={pokemon} />
   ));
   return (
-    <div className='container'>
-      <div className='pokedex'>{list}</div>
+    <div className='container container--red'>
+      <div className='pokedex grid'>{list}</div>
     </div>
   );
 }

@@ -7,6 +7,7 @@ const POKEMONS = gql`
   {
     pokemons(first: 151) {
       id
+      number
       name
       image
       maxHP
