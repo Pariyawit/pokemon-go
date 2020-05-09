@@ -31,16 +31,25 @@ body {
   &__list {
     padding: 0;
     margin: 0;
+    margin-top: -4px;
   }
   &__item {
     display: inline;
-    padding-left: 0.8rem;
+    font-size: 2.4rem;
+    padding-left: 1.6rem;
     a {
       color: $gray !important;
     }
   }
 }
 
+.map-icon--active {
+  color: $green;
+}
+
+.pokedex-icon--active {
+  color: $red;
+}
 main {
   margin-top: 55px;
 }
@@ -254,8 +263,8 @@ a {
   background: $gray;
   color: $dark;
   &__row {
-    // padding: 0.8rem;
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     &--head {
       background: $dark;
@@ -264,13 +273,19 @@ a {
   }
   &__item {
     padding: 0.8rem;
-    display: inline-block;
+    flex-grow: 1;
   }
   &__list {
     margin-top: -0.8rem;
     margin-bottom: 0.8rem;
+    padding-left: 1.6rem;
+    list-style: none;
     li {
       line-height: 2.4rem;
     }
   }
+}
+
+.text-right {
+  text-align: right;
 }

@@ -5,7 +5,6 @@ function PokedexItem({ pokemon }) {
   const img_style = {
     backgroundImage: `url(${pokemon.image})`,
   };
-  console.log(pokemon);
   return (
     <>
       {pokemon.status == 'caught' || true ? (

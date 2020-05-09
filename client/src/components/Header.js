@@ -1,16 +1,36 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMapMarkedAlt, faTh } from '@fortawesome/free-solid-svg-icons';
+import { useLocation } from 'react-router-dom';
+
 function Header() {
+  const { pathname } = useLocation();
+  console.log(pathname);
   return (
     <header className='header'>
       <div>PokemonGo</div>
       <nav className='nav'>
         <ul className='nav__list'>
           <li className='nav__item'>
-            <Link to='/'>Map</Link>
+            <Link to='/'>
+              <span
+                className={`map-icon ${pathname == '/' && 'map-icon--active'} `}
+              >
+                <FontAwesomeIcon icon={faMapMarkedAlt} />
+              </span>
+            </Link>
           </li>
           <li className='nav__item'>
-            <Link to='/pokedex'>Pokedex</Link>
+            <Link to='/pokedex'>
+              <span
+                className={`pokedex-icon ${
+                  pathname.includes('/pokedex') && 'pokedex-icon--active'
+                } `}
+              >
+                <FontAwesomeIcon icon={faTh} />
+              </span>
+            </Link>
           </li>
         </ul>
       </nav>

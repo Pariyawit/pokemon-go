@@ -55,34 +55,47 @@ function Detail() {
             <div className='table'>
               <div className='table__row table__row--head'>
                 <div className='table__item'>{data.pokemon.name}</div>
-                <div className='table__item'>No.{data.pokemon.number}</div>
+                <div className='table__item text-right'>
+                  No.{data.pokemon.number}
+                </div>
               </div>
               <div className='table__row'>
                 <div className='table__item'>Type</div>
-                <div className='table__item'>{data.pokemon.types}</div>
+                <div className='table__item text-right'>
+                  {data.pokemon.types.join(', ')}
+                </div>
               </div>
               <div className='table__row'>
                 <div className='table__item'>Height</div>
-                <div className='table__item'>{data.pokemon.height.minimum}</div>
+                <div className='table__item text-right'>
+                  {data.pokemon.height.minimum}
+                </div>
               </div>
               <div className='table__row'>
                 <div className='table__item'>Weight</div>
-                <div className='table__item'>{data.pokemon.weight.minimum}</div>
+                <div className='table__item text-right'>
+                  {data.pokemon.weight.minimum}
+                </div>
               </div>
               <div className='table__row'>
-                <div className='table__item'>Evolutions</div>
+                <div className='table__item '>Evolutions</div>
               </div>
-              {data.pokemon.evolutions && (
-                <div className='table__row'>
-                  <div className='table__item'>
-                    <ul className='table__list'>
-                      {data.pokemon.evolutions.map((evo) => (
-                        <li key={evo.name}>{evo.name}</li>
-                      ))}
-                    </ul>
-                  </div>
+
+              <div className='table__row'>
+                <div className='table__item'>
+                  <ul className='table__list'>
+                    {data.pokemon.evolutions ? (
+                      <>
+                        {data.pokemon.evolutions.map((evo) => (
+                          <li key={evo.name}>* {evo.name}</li>
+                        ))}
+                      </>
+                    ) : (
+                      <span>–</span>
+                    )}
+                  </ul>
                 </div>
-              )}
+              </div>
             </div>
           </div>
         )}
