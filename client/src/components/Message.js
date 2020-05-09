@@ -30,7 +30,7 @@ function Message({ zoom, count, distance, bounds, pokeball, status }) {
         <p className='message__text'>
           {count} pokemon(s) in this area
           <br />
-          Look closer to catch
+          Look closer to encounter
         </p>
       ) : (
         <p className='message__text'>

@@ -72,15 +72,17 @@ function Detail() {
               <div className='table__row'>
                 <div className='table__item'>Evolutions</div>
               </div>
-              <div className='table__row'>
-                <div className='table__item'>
-                  <ul className='table__list'>
-                    {data.pokemon.evolutions.map((evo) => (
-                      <li key={evo.name}>{evo.name}</li>
-                    ))}
-                  </ul>
+              {data.pokemon.evolutions && (
+                <div className='table__row'>
+                  <div className='table__item'>
+                    <ul className='table__list'>
+                      {data.pokemon.evolutions.map((evo) => (
+                        <li key={evo.name}>{evo.name}</li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
           </div>
         )}
