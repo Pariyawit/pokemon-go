@@ -54,7 +54,6 @@ function closest_pokemon(pokemons, nw, se) {
 }
 
 function scanArea(pokemons, nw, se) {
-  console.log({ pokemons, nw, se });
   if (nw === undefined) return;
   let cnt = pokemons
     .filter((p) => p.status == 'wild')

@@ -7,7 +7,7 @@ function PokedexItem({ pokemon }) {
   };
   return (
     <>
-      {pokemon.status == 'caught' || true ? (
+      {pokemon.status == 'caught' ? (
         <div className='pokedex__item'>
           <div className='pokedex__content'>
             <Link to={`/pokedex/${pokemon.name}`}>

@@ -42,9 +42,11 @@ function Detail() {
       <div className='submenu'>
         <Link to='/pokedex'>{`< Back`}</Link>
       </div>
-      <div>
+      <>
         {loading ? (
-          <p>Loading</p>
+          <div className='loading'>
+            <img src='/pokeball-spining.gif' />
+          </div>
         ) : (
           <div className='detail'>
             <div className='detail__card'>
@@ -99,7 +101,7 @@ function Detail() {
             </div>
           </div>
         )}
-      </div>
+      </>
     </>
   );
 }

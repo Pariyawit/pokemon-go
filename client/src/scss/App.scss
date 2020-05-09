@@ -94,7 +94,7 @@ main {
 .message {
   width: 100%;
   background: rgba(0, 46, 41, 0.66);
-  position: absolute;
+  position: fixed;
   bottom: 0;
   left: 0;
 
@@ -111,6 +111,7 @@ main {
 .container {
   padding: 1.6rem;
   min-height: calc(100vh - 55px - 3.2rem);
+  min-height: calc(var(--vh, 1vh) * 100 - 55px - 3.2rem);
   &--red {
     background-color: $red;
   }
@@ -288,4 +289,11 @@ a {
 
 .text-right {
   text-align: right;
+}
+
+.loading {
+  display: flex;
+  justify-items: center;
+  justify-content: center;
+  margin-top: calc(50vh - 120px);
 }

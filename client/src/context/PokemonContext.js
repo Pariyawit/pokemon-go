@@ -45,6 +45,7 @@ function PokemonContextProvider(props) {
       return p;
     });
     setPokemons(updatePokemons);
+    sessionStorage.setItem('pokemon-go', JSON.stringify(updatePokemons));
   };
 
   const location = () => {
@@ -58,13 +59,18 @@ function PokemonContextProvider(props) {
   };
 
   useEffect(() => {
-    if (data) {
-      const updatePokemon = data.pokemons.map((p) => ({
-        ...p,
-        status: 'wild',
-        location: location(),
-      }));
-      setPokemons(updatePokemon);
+    if (sessionStorage.getItem('pokemon-go')) {
+      setPokemons(JSON.parse(sessionStorage.getItem('pokemon-go')));
+    } else {
+      if (data) {
+        const updatePokemons = data.pokemons.map((p) => ({
+          ...p,
+          status: 'wild',
+          location: location(),
+        }));
+        setPokemons(updatePokemons);
+        sessionStorage.setItem('pokemon-go', JSON.stringify(updatePokemons));
+      }
     }
   }, [data]);
 

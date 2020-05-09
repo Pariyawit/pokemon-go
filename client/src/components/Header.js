@@ -6,10 +6,11 @@ import { useLocation } from 'react-router-dom';
 
 function Header() {
   const { pathname } = useLocation();
-  console.log(pathname);
   return (
     <header className='header'>
-      <div>PokemonGo</div>
+      <Link to='/'>
+        <div>PokemonGo</div>
+      </Link>
       <nav className='nav'>
         <ul className='nav__list'>
           <li className='nav__item'>
