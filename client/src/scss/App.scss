@@ -174,13 +174,6 @@ a {
 
     animation: cardEntrace 700ms ease-out;
     animation-fill-mode: backwards;
-    @for $i from 1 through 151 {
-      &:nth-child(#{$i}) {
-        animation: cardEntrace 700ms ease-out;
-        animation-fill-mode: backwards;
-        animation-delay: calc($i * 100ms);
-      }
-    }
 
     a {
       text-decoration: none;
