@@ -92,7 +92,6 @@ function Map() {
   } = useContext(PokemonContext);
 
   const handleChange = (e) => {
-    // console.log(e);
     setZoom(e.zoom);
     setCenter(e.center);
     setNW(e.bounds.nw);

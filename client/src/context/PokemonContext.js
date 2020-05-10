@@ -17,6 +17,13 @@ const POKEMONS = gql`
 
 const PokemonContext = React.createContext();
 
+var storage = {};
+try {
+  storage = window.sessionStorage || {};
+} catch (e) {
+  storage = {};
+}
+
 function PokemonContextProvider(props) {
   const [pokemons, setPokemons] = useState([]);
   const [pokeball, setPokeball] = useState();
@@ -33,10 +40,8 @@ function PokemonContextProvider(props) {
   let locations = centroidsData;
 
   const setPokemonStatus = (id, status) => {
-    console.log({ id, status });
     const updatePokemons = pokemons.map((p) => {
       if (p.id === id) {
-        console.log(p);
         return {
           ...p,
           status: status,
@@ -45,7 +50,11 @@ function PokemonContextProvider(props) {
       return p;
     });
     setPokemons(updatePokemons);
-    sessionStorage.setItem('pokemon-go', JSON.stringify(updatePokemons));
+    try {
+      storage.setItem('pokemon-go', JSON.stringify(updatePokemons));
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   const location = () => {
@@ -59,8 +68,12 @@ function PokemonContextProvider(props) {
   };
 
   useEffect(() => {
-    if (sessionStorage.getItem('pokemon-go')) {
-      setPokemons(JSON.parse(sessionStorage.getItem('pokemon-go')));
+    if (storage.getItem('pokemon-go')) {
+      try {
+        setPokemons(JSON.parse(storage.getItem('pokemon-go')));
+      } catch (e) {
+        console.log(e);
+      }
     } else {
       if (data) {
         const updatePokemons = data.pokemons.map((p) => ({
@@ -69,7 +82,11 @@ function PokemonContextProvider(props) {
           location: location(),
         }));
         setPokemons(updatePokemons);
-        sessionStorage.setItem('pokemon-go', JSON.stringify(updatePokemons));
+        try {
+          storage.setItem('pokemon-go', JSON.stringify(updatePokemons));
+        } catch (e) {
+          console.log(e);
+        }
       }
     }
   }, [data]);

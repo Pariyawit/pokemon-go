@@ -33,9 +33,7 @@ function POKEMON(name) {
 
 function Detail() {
   let { name } = useParams();
-  console.log(name);
   const { loading, error, data } = useQuery(POKEMON(name));
-  console.log(data);
   if (data) {
     const { image } = data.pokemon;
   }

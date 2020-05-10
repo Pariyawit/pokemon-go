@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { PokemonContext } from '../context/PokemonContext';
 
 function show(p, nw, se) {
@@ -28,8 +28,6 @@ function Pokemon({ pokemon, zoom }) {
     setPokeball(pokemon);
     setPokemonStatus(id, 'caught');
   };
-
-  const pClass = status == 'wild' ? 'pokemon' : 'pokemon pokemon--pokeball';
 
   return (
     <>

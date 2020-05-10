@@ -9,14 +9,16 @@ function Header() {
   return (
     <header className='header'>
       <Link to='/'>
-        <div>PokemonGo</div>
+        <div>PokémonGo</div>
       </Link>
       <nav className='nav'>
         <ul className='nav__list'>
           <li className='nav__item'>
             <Link to='/'>
               <span
-                className={`map-icon ${pathname == '/' && 'map-icon--active'} `}
+                className={`map-icon ${
+                  pathname === '/' && 'map-icon--active'
+                } `}
               >
                 <FontAwesomeIcon icon={faMapMarkedAlt} />
               </span>

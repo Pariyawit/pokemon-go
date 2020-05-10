@@ -21,7 +21,7 @@ function Pokedex() {
       <Switch>
         <Route exact path='/pokedex'>
           <div className='submenu submenu--space-between'>
-            <div>Pokedex</div>
+            <div>Pokédex</div>
             <div className='number'>{`${catched}/${pokemons.length}`}</div>
           </div>
           <div className='pokedex grid'>{list}</div>
