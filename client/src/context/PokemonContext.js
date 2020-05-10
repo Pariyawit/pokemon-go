@@ -17,11 +17,11 @@ const POKEMONS = gql`
 
 const PokemonContext = React.createContext();
 
-var storage = {};
+var storage = null;
 try {
-  storage = window.sessionStorage || {};
+  storage = window.sessionStorage || null;
 } catch (e) {
-  storage = {};
+  storage = null;
 }
 
 function PokemonContextProvider(props) {
@@ -68,7 +68,7 @@ function PokemonContextProvider(props) {
   };
 
   useEffect(() => {
-    if (storage.getItem('pokemon-go')) {
+    if (storage && storage.getItem('pokemon-go')) {
       try {
         setPokemons(JSON.parse(storage.getItem('pokemon-go')));
       } catch (e) {
